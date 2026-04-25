@@ -1,4 +1,4 @@
-import 'package:braineravr/card_widget.dart';
+import 'package:braineravr/Row_column/card_widget.dart';
 import 'package:flutter/material.dart';
 
 class ColumnTest extends StatelessWidget {
