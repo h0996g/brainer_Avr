@@ -1,6 +1,6 @@
+import 'package:braineravr/cache/cache_helper.dart';
 import 'package:braineravr/form/login_page.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatelessWidget {
   final String name;
@@ -18,9 +18,7 @@ class ProfilePage extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () async {
-              final SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
-              await prefs.remove('isLoggedIn');
+              await CacheHelper.prefs.remove('isLoggedIn');
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginPage()),

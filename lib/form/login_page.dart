@@ -1,7 +1,7 @@
+import 'package:braineravr/cache/cache_helper.dart';
 import 'package:braineravr/form/password_field_widget.dart';
 import 'package:braineravr/form/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   final void Function(bool)? onThemeChanged;
@@ -41,10 +41,8 @@ class _LoginPageState extends State<LoginPage> {
               isDarkMode = !isDarkMode;
             });
             widget.onThemeChanged?.call(isDarkMode);
-            final SharedPreferences prefs =
-                await SharedPreferences.getInstance();
 
-            await prefs.setBool('isDarkMode', isDarkMode);
+            await CacheHelper.prefs.setBool('isDarkMode', isDarkMode);
           },
         ),
       ),
@@ -77,10 +75,11 @@ class _LoginPageState extends State<LoginPage> {
               GestureDetector(
                 onTap: () async {
                   if (formKey.currentState!.validate()) {
-                    final SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    await prefs.setBool('isLoggedIn', true);
-                    await prefs.setString('name', nameController.text);
+                    await CacheHelper.prefs.setBool('isLoggedIn', true);
+                    await CacheHelper.prefs.setString(
+                      'name',
+                      nameController.text,
+                    );
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
