@@ -14,14 +14,12 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
   Widget build(BuildContext context) {
     print('PasswordFieldWidget build called');
     return TextFormField(
-      obscureText: isPasswordVisible,
+      obscureText: !isPasswordVisible,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter your email';
         }
-        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-          return 'Please enter a valid email address';
-        }
+
         return null;
       },
       controller: widget.passwordController,
